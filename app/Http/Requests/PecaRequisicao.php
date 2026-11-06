@@ -11,6 +11,15 @@ class PecaRequisicao extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if ($this->has('codigo')) {
+            $this->merge([
+                'codigo' => strtoupper(trim($this->codigo))
+            ]);
+        }
+    }
+
     public function rules()
     {
         $id = $this->route('peca') ?? $this->route('id');

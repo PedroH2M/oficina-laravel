@@ -44,9 +44,13 @@ class OrdemServicoController extends Controller
             $dados['usuario_mecanico_id'] = Auth::id() ?? 1;
         }
 
-        $os = $this->osServico->abrirOrdemServico($dados, $request->input('itens', []));
-        return redirect()->route('ordens_servico.detalhes', $os->id)
-            ->with('sucesso', "Ordem de Serviço {$os->numero} aberta com sucesso!");
+        try {
+            $os = $this->osServico->abrirOrdemServico($dados, $request->input('itens', []));
+            return redirect()->route('ordens_servico.detalhes', $os->id)
+                ->with('sucesso', "Ordem de Serviço {$os->numero} aberta com sucesso!");
+        } catch (\InvalidArgumentException $e) {
+            return back()->withInput()->with('erro', $e->getMessage());
+        }
     }
 
     public function detalhes($id)

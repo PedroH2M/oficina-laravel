@@ -11,6 +11,15 @@ class ClienteRequisicao extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if ($this->has('cpf_cnpj')) {
+            $this->merge([
+                'cpf_cnpj' => preg_replace('/[^0-9]/', '', $this->cpf_cnpj)
+            ]);
+        }
+    }
+
     public function rules()
     {
         $id = $this->route('cliente') ?? $this->route('id');

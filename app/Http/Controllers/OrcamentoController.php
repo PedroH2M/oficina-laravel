@@ -40,9 +40,13 @@ class OrcamentoController extends Controller
         $dados = $request->except('itens');
         $dados['usuario_id'] = Auth::id() ?? 1;
 
-        $orcamento = $this->orcamentoServico->criarOrcamento($dados, $request->input('itens', []));
-        return redirect()->route('orcamentos.detalhes', $orcamento->id)
-            ->with('sucesso', 'Orçamento gerado com sucesso!');
+        try {
+            $orcamento = $this->orcamentoServico->criarOrcamento($dados, $request->input('itens', []));
+            return redirect()->route('orcamentos.detalhes', $orcamento->id)
+                ->with('sucesso', 'Orçamento gerado com sucesso!');
+        } catch (\InvalidArgumentException $e) {
+            return back()->withInput()->with('erro', $e->getMessage());
+        }
     }
 
     public function detalhes($id)

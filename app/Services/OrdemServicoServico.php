@@ -57,6 +57,10 @@ class OrdemServicoServico implements OrdemServicoServicoInterface
 
                 // Baixar estoque se a peça for informada
                 if (!empty($item['peca_id'])) {
+                    $peca = $this->pecaRepo->buscarPorId($item['peca_id']);
+                    if ($peca && $peca->quantidade_estoque < $item['quantidade']) {
+                        throw new InvalidArgumentException("Estoque insuficiente para a peça '{$peca->nome}' (Disponível em estoque: {$peca->quantidade_estoque}, Solicitado: {$item['quantidade']}).");
+                    }
                     $this->pecaRepo->debitarEstoque($item['peca_id'], $item['quantidade']);
                 }
             } else {

@@ -11,6 +11,15 @@ class VeiculoRequisicao extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if ($this->has('placa')) {
+            $this->merge([
+                'placa' => strtoupper(trim(str_replace(['-', ' '], '', $this->placa)))
+            ]);
+        }
+    }
+
     public function rules()
     {
         $id = $this->route('veiculo') ?? $this->route('id');
