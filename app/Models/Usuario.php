@@ -52,4 +52,9 @@ class Usuario extends Authenticatable
     {
         return $this->perfil === 'mecanico';
     }
+
+    public function ehAtendente()
+    {
+        return $this->perfil === 'atendente';
+    }
 }

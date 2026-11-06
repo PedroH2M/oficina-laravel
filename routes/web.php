@@ -16,8 +16,8 @@ Route::middleware(['auth'])->group(function () {
     // Painel Principal / Dashboard
     Route::get('/painel', 'PainelController@index')->name('painel');
 
-    // Gestão de Funcionários / Usuários
-    Route::prefix('usuarios')->name('usuarios.')->group(function () {
+    // Gestão de Funcionários / Usuários (Exclusivo Administrador)
+    Route::prefix('usuarios')->name('usuarios.')->middleware(['perfil:administrador'])->group(function () {
         Route::get('/', 'UsuarioController@index')->name('index');
         Route::get('/criar', 'UsuarioController@criar')->name('criar');
         Route::post('/', 'UsuarioController@armazenar')->name('armazenar');
@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/', 'ClienteController@armazenar')->name('armazenar');
         Route::get('/{id}/editar', 'ClienteController@editar')->name('editar');
         Route::put('/{id}', 'ClienteController@atualizar')->name('atualizar');
-        Route::delete('/{id}', 'ClienteController@excluir')->name('excluir');
+        Route::delete('/{id}', 'ClienteController@excluir')->name('excluir')->middleware('perfil:administrador');
     });
 
     // Gestão de Veículos e Histórico
@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/', 'ServicoController@armazenar')->name('armazenar');
         Route::get('/{id}/editar', 'ServicoController@editar')->name('editar');
         Route::put('/{id}', 'ServicoController@atualizar')->name('atualizar');
-        Route::delete('/{id}', 'ServicoController@excluir')->name('excluir');
+        Route::delete('/{id}', 'ServicoController@excluir')->name('excluir')->middleware('perfil:administrador');
     });
 
     // Controle de Peças e Estoque
@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/', 'PecaController@armazenar')->name('armazenar');
         Route::get('/{id}/editar', 'PecaController@editar')->name('editar');
         Route::put('/{id}', 'PecaController@atualizar')->name('atualizar');
-        Route::delete('/{id}', 'PecaController@excluir')->name('excluir');
+        Route::delete('/{id}', 'PecaController@excluir')->name('excluir')->middleware('perfil:administrador');
     });
 
     // Orçamentos

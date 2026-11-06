@@ -206,11 +206,13 @@
                 <i class="fas fa-cogs"></i> Peças & Estoque
             </a>
 
+            @if(Auth::user()->ehAdministrador())
             <div class="sidebar-header-label mt-3">Administração</div>
 
             <a href="{{ route('usuarios.index') }}" class="sidebar-link {{ request()->routeIs('usuarios.*') ? 'active' : '' }}">
                 <i class="fas fa-user-shield"></i> Funcionários / Usuários
             </a>
+            @endif
         </div>
 
         <div class="sidebar-footer">
