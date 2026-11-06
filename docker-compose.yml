@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # Servidor de Aplicação Laravel (PHP 7.2-FPM)
+  bdsoftcom_app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: bdsoftcom_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    environment:
+      DB_HOST: bdsoftcom_db
+      DB_PORT: 3306
+      DB_DATABASE: bdsoftcom_oficina
+      DB_USERNAME: bdsoftcom_user
+      DB_PASSWORD: bdsoftcom_pass
+    networks:
+      - bdsoftcom_network
+    depends_on:
+      - bdsoftcom_db
+
+  # Servidor Web (Nginx)
+  bdsoftcom_web:
+    image: nginx:1.19-alpine
+    container_name: bdsoftcom_web
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - bdsoftcom_network
+    depends_on:
+      - bdsoftcom_app
+
+  # Banco de Dados MySQL 5.7 (Totalmente estável e compatível com PHP 7.2)
+  bdsoftcom_db:
+    image: mysql:5.7
+    container_name: bdsoftcom_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: bdsoftcom_oficina
+      MYSQL_USER: bdsoftcom_user
+      MYSQL_PASSWORD: bdsoftcom_pass
+      MYSQL_ROOT_PASSWORD: bdsoftcom_root_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - bdsoftcom_db_data:/var/lib/mysql
+    networks:
+      - bdsoftcom_network
+
+  # Interface phpMyAdmin
+  bdsoftcom_phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: bdsoftcom_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: bdsoftcom_db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: bdsoftcom_root_pass
+    ports:
+      - "8081:80"
+    networks:
+      - bdsoftcom_network
+    depends_on:
+      - bdsoftcom_db
+
+networks:
+  bdsoftcom_network:
+    name: bdsoftcom_network
+    driver: bridge
+
+volumes:
+  bdsoftcom_db_data:
+    name: bdsoftcom_db_data
+    driver: local

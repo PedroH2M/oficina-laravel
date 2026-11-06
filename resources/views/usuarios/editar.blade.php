@@ -1,0 +1,60 @@
+@extends('layouts.app')
+
+@section('titulo', 'Editar Funcionário')
+
+@section('conteudo')
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0 font-weight-bold text-dark">
+                    <i class="fas fa-user-edit mr-1 text-warning"></i> Editar Funcionário: {{ $usuario->nome }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('usuarios.atualizar', $usuario->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="form-group mb-3">
+                        <label for="nome" class="font-weight-bold small">Nome Completo *</label>
+                        <input type="text" name="nome" id="nome" class="form-control @error('nome') is-invalid @enderror" value="{{ old('nome', $usuario->nome) }}" required>
+                        @error('nome') <span class="invalid-feedback">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="font-weight-bold small">E-mail de Acesso *</label>
+                        <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $usuario->email) }}" required>
+                        @error('email') <span class="invalid-feedback">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="form-row mb-3">
+                        <div class="form-group col-md-6">
+                            <label for="senha" class="font-weight-bold small">Alterar Senha (Opcional)</label>
+                            <input type="password" name="senha" id="senha" class="form-control @error('senha') is-invalid @enderror" placeholder="Deixe em branco para manter a atual">
+                            <small class="text-muted">Preencha apenas se desejar redefinir a senha.</small>
+                            @error('senha') <span class="invalid-feedback">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="perfil" class="font-weight-bold small">Cargo / Perfil de Acesso *</label>
+                            <select name="perfil" id="perfil" class="form-control @error('perfil') is-invalid @enderror" required>
+                                <option value="mecanico" {{ old('perfil', $usuario->perfil) == 'mecanico' ? 'selected' : '' }}>Mecânico</option>
+                                <option value="atendente" {{ old('perfil', $usuario->perfil) == 'atendente' ? 'selected' : '' }}>Atendente</option>
+                                <option value="administrador" {{ old('perfil', $usuario->perfil) == 'administrador' ? 'selected' : '' }}>Administrador</option>
+                            </select>
+                            @error('perfil') <span class="invalid-feedback">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <div class="text-right pt-2 border-top">
+                        <a href="{{ route('usuarios.index') }}" class="btn btn-secondary mr-2">Cancelar</a>
+                        <button type="submit" class="btn btn-warning font-weight-bold shadow-sm">
+                            <i class="fas fa-save mr-1"></i> Atualizar Dados
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
