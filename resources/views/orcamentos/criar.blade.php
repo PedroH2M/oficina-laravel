@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group col-md-2">
                             <label for="valor_desconto" class="font-weight-bold small">Desconto (R$)</label>
-                            <input type="number" step="0.01" name="valor_desconto" id="valor_desconto" class="form-control" value="{{ old('valor_desconto', '0.00') }}">
+                            <input type="number" min="0" step="0.01" name="valor_desconto" id="valor_desconto" class="form-control" value="{{ old('valor_desconto', '0.00') }}">
                         </div>
                     </div>
 
@@ -116,7 +116,7 @@
                                                 <input type="number" name="itens[0][quantidade]" class="form-control form-control-sm" value="1" min="1" required>
                                             </td>
                                             <td>
-                                                <input type="number" step="0.01" name="itens[0][valor_unitario]" class="form-control form-control-sm input-preco" value="0.00" required>
+                                                <input type="number" min="0" step="0.01" name="itens[0][valor_unitario]" class="form-control form-control-sm input-preco" value="0.00" required>
                                             </td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-sm btn-outline-danger btn-remover" disabled><i class="fas fa-trash"></i></button>
@@ -178,7 +178,7 @@
                 <input type="number" name="itens[${indice}][quantidade]" class="form-control form-control-sm" value="1" min="1" required>
             </td>
             <td>
-                <input type="number" step="0.01" name="itens[${indice}][valor_unitario]" class="form-control form-control-sm input-preco" value="0.00" required>
+                <input type="number" min="0" step="0.01" name="itens[${indice}][valor_unitario]" class="form-control form-control-sm input-preco" value="0.00" required>
             </td>
             <td class="text-center">
                 <button type="button" class="btn btn-sm btn-outline-danger btn-remover"><i class="fas fa-trash"></i></button>

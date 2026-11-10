@@ -47,25 +47,30 @@
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="ano_fabricacao">Ano Fabricação *</label>
-                            <input type="number" name="ano_fabricacao" id="ano_fabricacao" class="form-control" value="{{ old('ano_fabricacao', date('Y')) }}" required>
+                            <input type="number" name="ano_fabricacao" id="ano_fabricacao" min="1950" class="form-control @error('ano_fabricacao') is-invalid @enderror" value="{{ old('ano_fabricacao', date('Y')) }}" required>
+                            @error('ano_fabricacao') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-3">
                             <label for="ano_modelo">Ano Modelo *</label>
-                            <input type="number" name="ano_modelo" id="ano_modelo" class="form-control" value="{{ old('ano_modelo', date('Y')) }}" required>
+                            <input type="number" name="ano_modelo" id="ano_modelo" min="1950" class="form-control @error('ano_modelo') is-invalid @enderror" value="{{ old('ano_modelo', date('Y')) }}" required>
+                            @error('ano_modelo') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-3">
                             <label for="cor">Cor *</label>
-                            <input type="text" name="cor" id="cor" class="form-control" value="{{ old('cor') }}" placeholder="Ex: Prata, Preto" required>
+                            <input type="text" name="cor" id="cor" class="form-control @error('cor') is-invalid @enderror" value="{{ old('cor') }}" placeholder="Ex: Prata, Preto" required>
+                            @error('cor') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-3">
                             <label for="quilometragem_atual">KM Atual *</label>
-                            <input type="number" name="quilometragem_atual" id="quilometragem_atual" class="form-control" value="{{ old('quilometragem_atual', 0) }}" required>
+                            <input type="number" name="quilometragem_atual" id="quilometragem_atual" min="0" class="form-control @error('quilometragem_atual') is-invalid @enderror" value="{{ old('quilometragem_atual', 0) }}" required>
+                            @error('quilometragem_atual') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="chassi">Número do Chassi</label>
-                        <input type="text" name="chassi" id="chassi" class="form-control text-uppercase" value="{{ old('chassi') }}">
+                        <input type="text" name="chassi" id="chassi" class="form-control text-uppercase @error('chassi') is-invalid @enderror" value="{{ old('chassi') }}">
+                        @error('chassi') <span class="invalid-feedback">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="text-right">

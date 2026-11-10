@@ -272,6 +272,21 @@
                 </div>
             @endif
 
+            @if($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="d-flex align-items-center mb-1">
+                        <i class="fas fa-exclamation-circle mr-2"></i>
+                        <strong>Atenção! Por favor, verifique os erros abaixo:</strong>
+                    </div>
+                    <ul class="mb-0 pl-3">
+                        @foreach($errors->all() as $erro)
+                            <li>{{ $erro }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">&times;</button>
+                </div>
+            @endif
+
             @yield('conteudo')
         </main>
     </div>

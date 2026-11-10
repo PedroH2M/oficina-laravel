@@ -29,29 +29,35 @@
 
                     <div class="form-group">
                         <label for="descricao">Descrição / Aplicação</label>
-                        <textarea name="descricao" id="descricao" rows="2" class="form-control">{{ old('descricao', $peca->descricao) }}</textarea>
+                        <textarea name="descricao" id="descricao" rows="2" class="form-control @error('descricao') is-invalid @enderror">{{ old('descricao', $peca->descricao) }}</textarea>
+                        @error('descricao') <span class="invalid-feedback">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="preco_custo">Preço de Custo (R$) *</label>
-                            <input type="number" step="0.01" name="preco_custo" id="preco_custo" class="form-control" value="{{ old('preco_custo', $peca->preco_custo) }}" required>
+                            <input type="number" min="0" step="0.01" name="preco_custo" id="preco_custo" class="form-control @error('preco_custo') is-invalid @enderror" value="{{ old('preco_custo', $peca->preco_custo) }}" required>
+                            @error('preco_custo') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-3">
                             <label for="preco_venda">Preço de Venda (R$) *</label>
-                            <input type="number" step="0.01" name="preco_venda" id="preco_venda" class="form-control" value="{{ old('preco_venda', $peca->preco_venda) }}" required>
+                            <input type="number" min="0" step="0.01" name="preco_venda" id="preco_venda" class="form-control @error('preco_venda') is-invalid @enderror" value="{{ old('preco_venda', $peca->preco_venda) }}" required>
+                            @error('preco_venda') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-2">
                             <label for="quantidade_estoque">Estoque Atual *</label>
-                            <input type="number" name="quantidade_estoque" id="quantidade_estoque" class="form-control" value="{{ old('quantidade_estoque', $peca->quantidade_estoque) }}" required>
+                            <input type="number" min="0" name="quantidade_estoque" id="quantidade_estoque" class="form-control @error('quantidade_estoque') is-invalid @enderror" value="{{ old('quantidade_estoque', $peca->quantidade_estoque) }}" required>
+                            @error('quantidade_estoque') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-2">
                             <label for="estoque_minimo">Estoque Mínimo *</label>
-                            <input type="number" name="estoque_minimo" id="estoque_minimo" class="form-control" value="{{ old('estoque_minimo', $peca->estoque_minimo) }}" required>
+                            <input type="number" min="0" name="estoque_minimo" id="estoque_minimo" class="form-control @error('estoque_minimo') is-invalid @enderror" value="{{ old('estoque_minimo', $peca->estoque_minimo) }}" required>
+                            @error('estoque_minimo') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-2">
                             <label for="unidade_medida">Unidade *</label>
-                            <input type="text" name="unidade_medida" id="unidade_medida" class="form-control text-uppercase" value="{{ old('unidade_medida', $peca->unidade_medida) }}" required>
+                            <input type="text" name="unidade_medida" id="unidade_medida" class="form-control text-uppercase @error('unidade_medida') is-invalid @enderror" value="{{ old('unidade_medida', $peca->unidade_medida) }}" required>
+                            @error('unidade_medida') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                     </div>
 

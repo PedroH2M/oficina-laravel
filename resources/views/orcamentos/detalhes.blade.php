@@ -147,7 +147,7 @@
                 @csrf
                 <div class="form-group mr-2">
                     <label for="km" class="mr-2 text-white font-weight-bold">KM de Entrada:</label>
-                    <input type="number" name="quilometragem_entrada" id="km" class="form-control" value="{{ $orcamento->veiculo->quilometragem_atual }}" required>
+                    <input type="number" min="0" name="quilometragem_entrada" id="km" class="form-control" value="{{ $orcamento->veiculo->quilometragem_atual }}" required>
                 </div>
                 <button type="submit" class="btn btn-warning font-weight-bold">
                     <i class="fas fa-wrench mr-1"></i> Gerar Ordem de Serviço Agora

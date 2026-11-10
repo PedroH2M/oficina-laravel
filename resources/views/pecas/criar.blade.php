@@ -28,29 +28,35 @@
 
                     <div class="form-group">
                         <label for="descricao">Descrição / Aplicação / Compatibilidade</label>
-                        <textarea name="descricao" id="descricao" rows="2" class="form-control">{{ old('descricao') }}</textarea>
+                        <textarea name="descricao" id="descricao" rows="2" class="form-control @error('descricao') is-invalid @enderror">{{ old('descricao') }}</textarea>
+                        @error('descricao') <span class="invalid-feedback">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="preco_custo">Preço de Custo (R$) *</label>
-                            <input type="number" step="0.01" name="preco_custo" id="preco_custo" class="form-control" value="{{ old('preco_custo', '0.00') }}" required>
+                            <input type="number" min="0" step="0.01" name="preco_custo" id="preco_custo" class="form-control @error('preco_custo') is-invalid @enderror" value="{{ old('preco_custo', '0.00') }}" required>
+                            @error('preco_custo') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-3">
                             <label for="preco_venda">Preço de Venda (R$) *</label>
-                            <input type="number" step="0.01" name="preco_venda" id="preco_venda" class="form-control" value="{{ old('preco_venda', '0.00') }}" required>
+                            <input type="number" min="0" step="0.01" name="preco_venda" id="preco_venda" class="form-control @error('preco_venda') is-invalid @enderror" value="{{ old('preco_venda', '0.00') }}" required>
+                            @error('preco_venda') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-2">
                             <label for="quantidade_estoque">Estoque Inicial *</label>
-                            <input type="number" name="quantidade_estoque" id="quantidade_estoque" class="form-control" value="{{ old('quantidade_estoque', 10) }}" required>
+                            <input type="number" min="0" name="quantidade_estoque" id="quantidade_estoque" class="form-control @error('quantidade_estoque') is-invalid @enderror" value="{{ old('quantidade_estoque', 10) }}" required>
+                            @error('quantidade_estoque') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-2">
                             <label for="estoque_minimo">Estoque Mínimo *</label>
-                            <input type="number" name="estoque_minimo" id="estoque_minimo" class="form-control" value="{{ old('estoque_minimo', 5) }}" required>
+                            <input type="number" min="0" name="estoque_minimo" id="estoque_minimo" class="form-control @error('estoque_minimo') is-invalid @enderror" value="{{ old('estoque_minimo', 5) }}" required>
+                            @error('estoque_minimo') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-2">
                             <label for="unidade_medida">Unidade *</label>
-                            <input type="text" name="unidade_medida" id="unidade_medida" class="form-control text-uppercase" value="{{ old('unidade_medida', 'UN') }}" placeholder="UN, L, KG" required>
+                            <input type="text" name="unidade_medida" id="unidade_medida" class="form-control text-uppercase @error('unidade_medida') is-invalid @enderror" value="{{ old('unidade_medida', 'UN') }}" placeholder="UN, L, KG" required>
+                            @error('unidade_medida') <span class="invalid-feedback">{{ $message }}</span> @enderror
                         </div>
                     </div>
 

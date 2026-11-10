@@ -46,7 +46,13 @@ class VeiculoRequisicao extends FormRequest
             'placa.unique' => 'Esta placa já está cadastrada para outro veículo.',
             'marca.required' => 'A marca do veículo é obrigatória.',
             'modelo.required' => 'O modelo do veículo é obrigatório.',
+            'ano_fabricacao.required' => 'O ano de fabricação é obrigatório.',
+            'ano_fabricacao.min' => 'O ano de fabricação deve ser no mínimo 1950.',
+            'ano_modelo.required' => 'O ano do modelo é obrigatório.',
+            'ano_modelo.min' => 'O ano do modelo deve ser no mínimo 1950.',
+            'cor.required' => 'A cor do veículo é obrigatória.',
             'quilometragem_atual.required' => 'A quilometragem atual é obrigatória.',
+            'quilometragem_atual.min' => 'A quilometragem atual não pode ser negativa.',
         ];
     }
 }

@@ -55,7 +55,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="quilometragem_entrada" class="font-weight-bold small">KM de Entrada no Pátio *</label>
-                            <input type="number" name="quilometragem_entrada" id="quilometragem_entrada" class="form-control" value="{{ old('quilometragem_entrada', 0) }}" required>
+                            <input type="number" min="0" name="quilometragem_entrada" id="quilometragem_entrada" class="form-control" value="{{ old('quilometragem_entrada', 0) }}" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="data_previsao" class="font-weight-bold small">Previsão de Conclusão</label>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="valor_desconto" class="font-weight-bold small">Desconto (R$)</label>
-                            <input type="number" step="0.01" name="valor_desconto" id="valor_desconto" class="form-control" value="{{ old('valor_desconto', '0.00') }}">
+                            <input type="number" min="0" step="0.01" name="valor_desconto" id="valor_desconto" class="form-control" value="{{ old('valor_desconto', '0.00') }}">
                         </div>
                     </div>
 
@@ -132,7 +132,7 @@
                                                 <input type="number" name="itens[0][quantidade]" class="form-control form-control-sm" value="1" min="1" required>
                                             </td>
                                             <td>
-                                                <input type="number" step="0.01" name="itens[0][valor_unitario]" class="form-control form-control-sm input-preco" value="0.00" required>
+                                                <input type="number" min="0" step="0.01" name="itens[0][valor_unitario]" class="form-control form-control-sm input-preco" value="0.00" required>
                                             </td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-sm btn-outline-danger btn-remover" disabled><i class="fas fa-trash"></i></button>
@@ -194,7 +194,7 @@
                 <input type="number" name="itens[${indiceOS}][quantidade]" class="form-control form-control-sm" value="1" min="1" required>
             </td>
             <td>
-                <input type="number" step="0.01" name="itens[${indiceOS}][valor_unitario]" class="form-control form-control-sm input-preco" value="0.00" required>
+                <input type="number" min="0" step="0.01" name="itens[${indiceOS}][valor_unitario]" class="form-control form-control-sm input-preco" value="0.00" required>
             </td>
             <td class="text-center">
                 <button type="button" class="btn btn-sm btn-outline-danger btn-remover"><i class="fas fa-trash"></i></button>
